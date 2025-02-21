@@ -2,9 +2,8 @@ from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 from sklearn.metrics import accuracy_score
 
-
-from src.data_preprocess import DataPreprocessing
-
+# Importing the parent: DataPreprocessing class from data_preprocess.py
+from src.data_preprocess import DataPreprocessing 
 
 
 class ModelBuilder(DataPreprocessing):
