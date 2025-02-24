@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "meter"
+version = "beta-0.0.1"
+dependencies = [
+]
+requires-python = ">=3.12"
+authors = [
+  {name = "Marcus Pereira", email = "mpere75@lsu.edu},
+]
+maintainers = [
+  {name = "Marcus Pereira", email = "mpere75@lsu.edu}
+]
+description = "Package to supervised learning on meter data"
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/meter"]
