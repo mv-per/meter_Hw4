@@ -1,16 +1,9 @@
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np
-from sklearn.metrics import accuracy_score
-from numpy.typing import NDArray
-# Importing the parent: DataPreprocessing class from data_preprocess.py
-from meter.data_preprocess import DataPreprocessing 
 
 
-class ModelBuilder(DataPreprocessing):
 
-
-    def __init__(self, *args, **kwargs):
-        super(ModelBuilder, self).__init__(*args, **kwargs)
+class ModelBuilder():
 
 
     def split_dataset(self, X, y):
@@ -27,23 +20,32 @@ class ModelBuilder(DataPreprocessing):
         return (X_train, X_test, X_validation), (y_train, y_test, y_validation)
 
 
-    def dt(self, X_train, X_test, y_train, y_test):
+    def _get_accuracy(self,ytrue, y_predicted) -> None:
+        from sklearn.metrics import accuracy_score
+        self.accuracy = accuracy_score(ytrue, y_predicted)
+
+    def fit_classifier(self,X_train, y_train ) -> DecisionTreeClassifier:
+        classifier = DecisionTreeClassifier()
+        classifier.fit(X_train, y_train)
+        return classifier
+
+    def classify(self, X_train, X_test, y_train, y_test):
         #Create DT model
-        DT_classifier = DecisionTreeClassifier()
+        
 
         #Train the model
-        DT_classifier.fit(X_train, y_train)
+        classifier= self.fit_classifier(X_train, y_train)
 
         #Test the model
-        DT_predicted = DT_classifier.predict(X_test)
+        y_predicted = classifier.predict(X_test)
 
         error = 0
         for i in range(len(y_test)):
-            error += np.sum(DT_predicted != y_test)
+            error += np.sum(y_predicted != y_test)
 
         # total_accuracy = 1 - error / len(y_test)
 
         #get performance
-        self.accuracy = accuracy_score(y_test, DT_predicted)
+        self._get_accuracy(y_test, y_predicted)
 
-        return DT_classifier
+        return classifier
