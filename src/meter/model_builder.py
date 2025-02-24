@@ -24,7 +24,7 @@ class ModelBuilder(DataPreprocessing):
         for i in range(len(y_test)):
             error += np.sum(DT_predicted != y_test)
 
-        total_accuracy = 1 - error / len(y_test)
+        # total_accuracy = 1 - error / len(y_test)
 
         #get performance
         self.accuracy = accuracy_score(y_test, DT_predicted)

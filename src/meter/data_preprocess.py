@@ -12,4 +12,11 @@ class DataPreprocessing():
 
         data = data.to_numpy()
 
-        return data
+        return self.normalize_data(data)
+    
+    def normalize_data(self, data):
+        from sklearn.preprocessing import StandardScaler
+
+        print("normalizing dataset")
+
+        return StandardScaler().fit_transform(data)
